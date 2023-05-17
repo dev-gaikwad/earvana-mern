@@ -1,0 +1,5 @@
+.products-section-container {
+  width: 75%;
+  display: flex;
+  justify-content: center;
+}
