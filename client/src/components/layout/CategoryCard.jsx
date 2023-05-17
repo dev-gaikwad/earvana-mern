@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../css/CategoryCard.css';
 
-const CategoryCard = ({ SVGIcon, description, fill }) => {
+const CategoryCard = ({ SVGIcon, description }) => {
   return (
     <div className='category-card'>
       <div className='category-card-svg'>

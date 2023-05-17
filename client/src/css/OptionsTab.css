@@ -1,11 +1,11 @@
 .options-tab-container {
-  width: 25%;
+  width: 20%;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--x-light-primary-color);
-  border-right: 1px solid rgb(227, 226, 226);
+  border-right: 1px solid rgb(226, 226, 226);
 }
 
 .option-container {

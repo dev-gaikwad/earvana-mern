@@ -13,33 +13,37 @@ import { AuthServiceProvider } from './context/AuthContext';
 import ProductListingPage from './pages/ProductListingPage';
 
 import DataAdder from './components/DataAdder';
+import { UserContextProvider } from './context/UserContext';
 
 function App() {
   return (
     <>
       <Router>
         <AuthServiceProvider>
-          <Header />
-          <main>
-            <Routes>
-              <Route path='/' element={<ExplorePage />} />
-              <Route path='/profile' element={<ProfilePage />} />
-              <Route path='/signin' element={<SignInPage />} />
-              <Route path='/cart' element={<SignUpPage />} />
-              <Route path='/signup' element={<SignUpPage />} />
-              <Route path='/products' element={<ProductListingPage />} />
-              <Route path='/add' element={<DataAdder />} />
-            </Routes>
-          </main>
-          <Footer />
+          <UserContextProvider>
+            <Header />
+            <main>
+              <Routes>
+                <Route path='/' element={<ExplorePage />} />
+                <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/signin' element={<SignInPage />} />
+                <Route path='/cart' element={<SignUpPage />} />
+                <Route path='/signup' element={<SignUpPage />} />
+                <Route path='/products' element={<ProductListingPage />} />
+                <Route path='/add' element={<DataAdder />} />
+              </Routes>
+            </main>
+            <Footer />
+          </UserContextProvider>
         </AuthServiceProvider>
       </Router>
       <ToastContainer
         position='top-center'
-        autoClose={3000}
-        closeOnClick
-        pauseOnFocusLoss
+        autoClose={2500}
         draggable
+        pauseOnHover
+        pauseOnFocusLoss
+        closeButton={false}
         theme='colored'
       />
     </>

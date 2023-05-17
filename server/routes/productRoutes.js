@@ -42,4 +42,15 @@ router.post('/add-product', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  try {
+    const allProducts = await Product.find();
+    if (allProducts) {
+      res.status(200).json(allProducts);
+    }
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = router;

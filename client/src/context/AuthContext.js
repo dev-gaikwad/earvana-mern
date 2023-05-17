@@ -73,6 +73,7 @@ export const AuthServiceProvider = ({ children }) => {
         toast.error('Logged out, Token Expired');
       } else {
         console.error('Checking error ->', error);
+        localStorage.removeItem('token');
         setToken(null);
         setUser(false);
       }

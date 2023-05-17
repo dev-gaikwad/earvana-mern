@@ -6,15 +6,12 @@ const User = require('./modules/User');
 dotenv.config({ path: './.env' });
 
 const authorize = async (req, res, next) => {
-  console.log('Raa ->', req.headers.authorization);
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(' ')[1];
-    console.log('token ->', token);
     jwt.verify(
       token,
       process.env.JWT_SECRET_KEY,
       async (error, decodedToken) => {
-        console.log(decodedToken);
         if (!error) {
           if (decodedToken !== undefined) {
             if (decodedToken.id === (await getUserById(decodedToken.id))) {
