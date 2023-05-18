@@ -1,24 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import '../../css/ProductsSection.css';
-import { UserContext } from '../../context/UserContext';
+import { ProductContext } from '../../context/ProductContext';
 import ProductCard from './ProductCard';
-import { useParams } from 'react-router-dom';
 
 const ProductsSection = () => {
-  const [productsToBeDisplayed, setProductsToBeDisplayed] = useState([]);
+  const { state, allProducts, filterAndSortProducts } =
+    useContext(ProductContext);
 
-  const { allProducts } = useContext(UserContext);
-
-  const { query } = useParams();
-
+  const filteredAndSortedProducts = filterAndSortProducts(
+    allProducts,
+    state.filters
+  );
   return (
     <div className='products-section-container'>
-      {productsToBeDisplayed ? (
-        productsToBeDisplayed.map((product) => (
+      {filteredAndSortedProducts ? (
+        filteredAndSortedProducts.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))
       ) : (
-        <p>Loading...</p>
+        <h1>Loading...</h1>
       )}
     </div>
   );

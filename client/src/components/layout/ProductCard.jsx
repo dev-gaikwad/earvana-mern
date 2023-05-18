@@ -1,18 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import '../../css/ProductCard.css';
+import ratingColorFilter from '../../utils/helper/filters/ratingColorFilter';
 
 const ProductCard = ({ product }) => {
-  const ratingColorFilter = (rating) => {
-    if (rating >= 3.5) {
-      return 'high-rating';
-    } else if (rating >= 2) {
-      return 'medium-rating';
-    } else return 'low-rating';
-  };
+  const navigate = useNavigate();
 
-  const showDetailsHandler = () => {
-    console.log('details');
-  };
   const wishlistHandler = () => {
     console.log('wishlist');
   };
@@ -23,10 +17,16 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <article className='product-card'>
-        <div onClick={showDetailsHandler} className='product-image'>
+        <div
+          onClick={() => navigate(`/products/${product._id}`)}
+          className='product-image'
+        >
           <img src={product.image_url} alt='product.name' />
         </div>
-        <div onClick={showDetailsHandler} className='product-description'>
+        <div
+          onClick={() => navigate(`/products/${product._id}`)}
+          className='product-description'
+        >
           <div className='product-info-header'>
             <div className='product-brand'>{product.brand}</div>
             <div className='product-category'>

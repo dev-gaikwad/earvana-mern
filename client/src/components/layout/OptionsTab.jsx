@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../css/OptionsTab.css';
+import { ProductContext } from '../../context/ProductContext';
+
+const categoryList = [
+  'in_ear',
+  'over_ear',
+  'wired',
+  'wireless',
+  'tools',
+  'cables',
+];
 
 const OptionsTab = () => {
+  const { state, dispatch } = useContext(ProductContext);
+
   return (
     <div className='options-tab-container'>
       <div className='tab-content'>
@@ -14,6 +26,9 @@ const OptionsTab = () => {
                 name='search'
                 type='text'
                 placeholder='Search'
+                onChange={(e) =>
+                  dispatch({ type: 'SEARCH_PRODUCT', payload: e.target.value })
+                }
               />
             </div>
           </div>
@@ -35,34 +50,45 @@ const OptionsTab = () => {
             <div className='option'>
               <label>Category</label>
 
-              <label htmlFor='in-ear'>
-                <input type='checkbox' id='in-ear' />
-                In-Ear
-              </label>
-              <label htmlFor='over-ear'>
-                <input type='checkbox' id='over-ear' />
-                Over-Ear
-              </label>
-              <label htmlFor='wired'>
-                <input type='checkbox' id='wired' />
-                Wired
-              </label>
-              <label htmlFor='wireless'>
-                <input type='checkbox' id='wireless' />
-                Wireless
-              </label>
-              <label htmlFor='tools'>
-                <input type='checkbox' id='tools' />
-                Tools
-              </label>
-              <label htmlFor='cables'>
-                <input type='checkbox' id='cables' />
-                Cables
-              </label>
+              {categoryList.map((category, index) => (
+                <label key={index} htmlFor={category} className='category-name'>
+                  <input
+                    type='checkbox'
+                    id={category}
+                    checked={state.filters.categories.includes(category)}
+                    onChange={() =>
+                      dispatch({
+                        type: 'FILTER_BY_CATEGORIES',
+                        payload: category,
+                      })
+                    }
+                  />
+                  {category}
+                </label>
+              ))}
             </div>
             <div className='option'>
               <label htmlFor='ratings'>Ratings</label>
-              <input id='ratings' name='ratings' type='range' min={1} max={5} />
+              <p>
+                {state.filters.rating ? state.filters.rating : 1}
+                {state.filters.rating < 5 && '+'}
+              </p>
+              <input
+                id='ratings'
+                name='ratings'
+                type='range'
+                min={1}
+                max={5}
+                step={1}
+                defaultValue={1}
+                list='rating-markers'
+                onChange={(e) =>
+                  dispatch({
+                    type: 'FILTER_BY_RATINGS',
+                    payload: +e.target.value,
+                  })
+                }
+              />
             </div>
           </div>
         </div>
@@ -71,11 +97,25 @@ const OptionsTab = () => {
           <div className='options-list'>
             <div className='option'>
               <label htmlFor='H2L'>
-                <input type='radio' id='H2L' name='sortByPrice' value='H2L' />
+                <input
+                  type='radio'
+                  id='H2L'
+                  name='sortByPrice'
+                  onChange={() =>
+                    dispatch({ type: 'SORT', payload: 'highToLow' })
+                  }
+                />
                 Price High to Low
               </label>
               <label htmlFor='L2H'>
-                <input type='radio' id='L2H' name='sortByPrice' value='L2H' />
+                <input
+                  type='radio'
+                  id='L2H'
+                  name='sortByPrice'
+                  onChange={() =>
+                    dispatch({ type: 'SORT', payload: 'lowToHigh' })
+                  }
+                />
                 Price Low to High
               </label>
             </div>
@@ -83,7 +123,12 @@ const OptionsTab = () => {
         </div>
       </div>
       <div className='tab-buttons'>
-        <button className='btn-secondary'>Clear All</button>
+        <button
+          className='btn-secondary'
+          onClick={() => dispatch({ type: 'CLEAR_ALL' })}
+        >
+          Clear All
+        </button>
       </div>
     </div>
   );

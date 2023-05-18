@@ -1,6 +1,7 @@
 .options-tab-container {
   width: 20%;
   min-height: 70vh;
+  max-height: 91vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,4 +34,8 @@
   padding: 0 0.75rem 0rem 0.75rem;
   font-size: 1rem;
   color: var(--secondary-color);
+}
+
+.option .category-name {
+  text-transform: capitalize;
 }

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import OptionsTab from '../components/layout/OptionsTab';
 import ProductsSection from '../components/layout/ProductsSection';
-import { UserContext } from '../context/UserContext';
+import { ProductContext } from '../context/ProductContext';
 
 import '../css/ProductsListingPage.css';
 
 const ProductListingPage = () => {
-  const { getAllProducts } = useContext(UserContext);
+  const { getAllProducts } = useContext(ProductContext);
 
   useEffect(() => {
     getAllProducts();

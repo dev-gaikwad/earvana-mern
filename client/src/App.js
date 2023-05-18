@@ -13,14 +13,15 @@ import { AuthServiceProvider } from './context/AuthContext';
 import ProductListingPage from './pages/ProductListingPage';
 
 import DataAdder from './components/DataAdder';
-import { UserContextProvider } from './context/UserContext';
+import { ProductContextProvider } from './context/ProductContext';
+import ProductDescriptionPage from './pages/ProductDescriptionPage';
 
 function App() {
   return (
     <>
       <Router>
         <AuthServiceProvider>
-          <UserContextProvider>
+          <ProductContextProvider>
             <Header />
             <main>
               <Routes>
@@ -30,11 +31,15 @@ function App() {
                 <Route path='/cart' element={<SignUpPage />} />
                 <Route path='/signup' element={<SignUpPage />} />
                 <Route path='/products' element={<ProductListingPage />} />
+                <Route
+                  path='/products/:id'
+                  element={<ProductDescriptionPage />}
+                />
                 <Route path='/add' element={<DataAdder />} />
               </Routes>
             </main>
             <Footer />
-          </UserContextProvider>
+          </ProductContextProvider>
         </AuthServiceProvider>
       </Router>
       <ToastContainer
