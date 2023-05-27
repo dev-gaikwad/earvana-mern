@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
-// const authRoutes = require('./routes/authRoutes');
-// const userRoutes = require('./routes/userRoutes');
-// const productRoutes = require('./routes/productRoutes');
-// const authorize = require('./jwtAuthouriser');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
+const authorize = require('./jwtAuthouriser');
 
 const app = express();
 app.use(cors());
@@ -18,42 +18,12 @@ mongoose.connect(
   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_CLUSTER}.yckv4ef.mongodb.net/?retryWrites=true&w=majority`
 );
 
-const ProductSchema = mongoose.Schema({
-  id: mongoose.ObjectId,
-  name: { type: String, required: true },
-  brand: { type: String, required: true },
-  category: { type: String, required: true },
-  in_ear: Boolean,
-  wired: Boolean,
-  image_url: String,
-  price: Number,
-  discount: Boolean,
-  rating: Number,
-  description: String,
-  created_at: { type: Date, default: Date.now },
-});
-
-const Product = mongoose.model('Product', ProductSchema);
-
-// app.use('/auth', authRoutes);
-// app.use('/user', userRoutes);
-// app.use('/product', productRoutes);
-
-app.get('/productAll', async (req, res) => {
-  try {
-    console.log('Incoming Request');
-    const allProducts = await Product.find({});
-    if (allProducts) {
-      console.log(allProducts);
-      res.status(200).send(allProducts);
-    }
-  } catch (error) {
-    res.send(error);
-  }
-});
+app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
+app.use('/product', productRoutes);
 
 app.use('/', (req, res) => {
-  res.send('Hello');
+  res.send('Earvana server running');
 });
 
 app.listen(process.env.PORT, () => {
