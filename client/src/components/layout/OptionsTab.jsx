@@ -2,14 +2,9 @@ import React, { useContext } from 'react';
 import '../../css/OptionsTab.css';
 import { ProductContext } from '../../context/ProductContext';
 
-const categoryList = [
-  'in_ear',
-  'over_ear',
-  'wired',
-  'wireless',
-  'tools',
-  'cables',
-];
+const categoryList = ['in_ear', 'over_ear', 'wired', 'wireless'];
+
+const accessoriesList = ['audioset', 'players', 'tools', 'cables'];
 
 const OptionsTab = () => {
   const { state, dispatch } = useContext(ProductContext);
@@ -36,7 +31,7 @@ const OptionsTab = () => {
         <div className='option-container'>
           <h3>Filter By</h3>
           <div className='options-list'>
-            <div className='option'>
+            {/* <div className='option'>
               <label htmlFor='priceRange'>Price</label>
               <input
                 className='price-range-input'
@@ -46,41 +41,73 @@ const OptionsTab = () => {
                 max={100000}
                 step={10000}
               />
-            </div>
+            </div> */}
             <div className='option'>
-              <label>Category</label>
-
-              {categoryList.map((category, index) => (
-                <label key={index} htmlFor={category} className='category-name'>
+              <label>Audiophile Accessories</label>
+              {accessoriesList.map((accessory, index) => (
+                <label
+                  key={index}
+                  htmlFor={accessory}
+                  className='accessory-name'
+                >
                   <input
                     type='checkbox'
-                    id={category}
-                    checked={state.filters.categories.includes(category)}
+                    id={accessory}
+                    checked={state.filters.accessory === accessory}
                     onChange={() =>
                       dispatch({
-                        type: 'FILTER_BY_CATEGORIES',
-                        payload: category,
+                        type: 'FILTER_BY_ACCESSORIES',
+                        payload: accessory,
                       })
                     }
                   />
-                  {category}
+                  {accessory}
                 </label>
               ))}
+              {state.filters.accessory === 'audioset' && (
+                <div className='option'>
+                  <label>Headphone Category</label>
+                  {categoryList.map((category, index) => (
+                    <label
+                      key={index}
+                      htmlFor={category}
+                      className='category-name'
+                    >
+                      <input
+                        type='checkbox'
+                        id={category}
+                        checked={state.filters.categories.includes(category)}
+                        onChange={() =>
+                          dispatch({
+                            type: 'FILTER_BY_CATEGORIES',
+                            payload: category,
+                          })
+                        }
+                      />
+                      {category}
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
             <div className='option'>
               <label htmlFor='ratings'>Ratings</label>
               <p>
-                {state.filters.rating ? state.filters.rating : 1}
-                {state.filters.rating < 5 && '+'}
+                {state.filters.rating
+                  ? `${state.filters.rating} ${
+                      state.filters.rating < 5 ? '+' : ''
+                    }`
+                  : 5}
               </p>
               <input
                 id='ratings'
+                className='ratings'
                 name='ratings'
                 type='range'
                 min={1}
                 max={5}
                 step={1}
-                defaultValue={1}
+                defaultValue={5}
                 list='rating-markers'
                 onChange={(e) =>
                   dispatch({

@@ -9,6 +9,7 @@ const UserSchema = mongoose.Schema({
   addresses: [
     { line1: String, line2: String, city: String, state: String, zip: Number },
   ],
+  cart: [],
   created_at: { type: Date, default: Date.now },
 });
 

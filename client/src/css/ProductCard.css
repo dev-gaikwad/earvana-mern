@@ -93,6 +93,11 @@
   background-color: var(--accent2-color);
   color: var(--white);
 }
+.medium-rating {
+  border: 1px solid var(--primary-contrast-color);
+  background-color: var(--primary-contrast-color);
+  color: var(--white);
+}
 
 .product-card-buttons-container {
   display: flex;

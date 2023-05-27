@@ -7,17 +7,18 @@ const DataAdder = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/product/add-product`,
         {
-          name: 'Focal Utopia',
-          brand: 'Focal',
-          category: 'Headphones',
-          in_ear: false,
-          wired: true,
-          image_url: '/images/products/headphones/wired/focal-utopia.jpg',
-          price: 299999,
-          discount: true,
-          rating: 5.0,
-          description:
-            'Indulge in the ultimate audio experience with the Focal Utopia wired headphones. These reference-grade headphones offer unrivaled sound quality, precise imaging, and unparalleled comfort, making them a true masterpiece for audiophiles.',
+          // name: 'Bose QuietComfort Earbuds',
+          // brand: 'Bose',
+          // category: 'Audioset',
+          // in_ear: true,
+          // wired: false,
+          // image_url:
+          //   '/images/products/earphones/wireless/bose-quietcomfort-earbuds.jpg',
+          // price: 24990,
+          // discount: false,
+          // rating: 4.6,
+          // description:
+          //   'Enjoy unparalleled noise cancellation and immersive sound with the Bose QuietComfort Earbuds. These true wireless earphones offer superb audio quality, comfortable fit and long battery',
         }
       );
     } catch (error) {

@@ -8,10 +8,7 @@ const Hero = () => {
     <section className='hero'>
       <div className='hero-content'>
         <h1 className='hero-title'>Listen to Music the Way It's Meant to Be</h1>
-        <button
-          className='hero-button'
-          onClick={() => navigate('/products/all')}
-        >
+        <button className='hero-button' onClick={() => navigate('/products')}>
           Shop Now
         </button>
       </div>

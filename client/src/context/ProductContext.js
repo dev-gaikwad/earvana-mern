@@ -2,6 +2,7 @@ import { createContext, useReducer, useState } from 'react';
 import axios from 'axios';
 import { productReducer, initialState } from '../reducers/productReducer';
 import filterSearchedProducts from '../utils/helper/filters/search';
+import filterAccessoryWiseProducts from '../utils/helper/filters/accesory';
 import filterCategoryWiseProducts from '../utils/helper/filters/category';
 import filterRatingWiseProducts from '../utils/helper/filters/rating';
 import sortProducts from '../utils/helper/filters/sort';
@@ -33,8 +34,13 @@ export const ProductContextProvider = ({ children }) => {
       filters.searchQuery
     );
 
-    const filteredByCategoriesProducts = filterCategoryWiseProducts(
+    const filteredByAccessoryProducts = filterAccessoryWiseProducts(
       matchedProducts,
+      filters.accessory
+    );
+
+    const filteredByCategoriesProducts = filterCategoryWiseProducts(
+      filteredByAccessoryProducts,
       filters.categories
     );
     const filteredByRatingProducts = filterRatingWiseProducts(

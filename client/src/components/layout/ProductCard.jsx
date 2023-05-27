@@ -10,9 +10,7 @@ const ProductCard = ({ product }) => {
   const wishlistHandler = () => {
     console.log('wishlist');
   };
-  const cartHandler = () => {
-    console.log('cart');
-  };
+  const cartHandler = () => {};
 
   return (
     <>
