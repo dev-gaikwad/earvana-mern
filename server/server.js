@@ -44,7 +44,9 @@ app.get('/productAll', async (req, res) => {
     console.log('Incoming Request');
     const allProducts = await Product.find({});
     if (allProducts) {
-      res.status(200).send(allProducts);
+      res.status(200).send('allProducts');
+    } else {
+      res.status(500).send('No products');
     }
   } catch (error) {
     res.send(error);
