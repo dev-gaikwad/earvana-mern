@@ -40,11 +40,11 @@ const Product = mongoose.model('Product', ProductSchema);
 // app.use('/product', productRoutes);
 
 app.get('/productAll', async (req, res) => {
-  console.log('Incoming Request');
   try {
+    console.log('Incoming Request');
     const allProducts = await Product.find({});
     if (allProducts) {
-      res.status(200).json(allProducts);
+      res.status(200).send(allProducts);
     }
   } catch (error) {
     res.send(error);
