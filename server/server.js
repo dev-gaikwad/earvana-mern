@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const authorize = require('./jwtAuthouriser');
+// const authRoutes = require('./routes/authRoutes');
+// const userRoutes = require('./routes/userRoutes');
+// const productRoutes = require('./routes/productRoutes');
+// const authorize = require('./jwtAuthouriser');
 
 const app = express();
 app.use(cors());
@@ -35,11 +35,12 @@ const ProductSchema = mongoose.Schema({
 
 const Product = mongoose.model('Product', ProductSchema);
 
-app.use('/auth', authRoutes);
-app.use('/user', userRoutes);
-app.use('/product', productRoutes);
+// app.use('/auth', authRoutes);
+// app.use('/user', userRoutes);
+// app.use('/product', productRoutes);
 
 app.get('/productAll', async (req, res) => {
+  console.log('Incoming Request');
   try {
     const allProducts = await Product.find({});
     if (allProducts) {
@@ -53,6 +54,7 @@ app.get('/productAll', async (req, res) => {
 app.use('/', (req, res) => {
   res.send('Hello');
 });
+
 app.listen(process.env.PORT, () => {
   console.log('Server running ...');
 });
