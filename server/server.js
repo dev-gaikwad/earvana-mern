@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
+const Product = require('./modules/Product');
+
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -24,6 +26,17 @@ app.use('/product', productRoutes);
 // app.use('/check', authorize, (req, res) => {
 //   res.send({ message: 'User is authporised to do this behaviour' });
 // });
+
+app.get('/productAll', async (req, res) => {
+  try {
+    const allProducts = await Product.find();
+    if (allProducts) {
+      res.status(200).json(allProducts);
+    }
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 app.use('/', (req, res) => {
   res.send('Hello');
