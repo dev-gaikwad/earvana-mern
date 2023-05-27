@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
-const Product = require('./modules/Product');
-
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -20,16 +18,30 @@ mongoose.connect(
   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_CLUSTER}.yckv4ef.mongodb.net/?retryWrites=true&w=majority`
 );
 
+const ProductSchema = mongoose.Schema({
+  id: mongoose.ObjectId,
+  name: { type: String, required: true },
+  brand: { type: String, required: true },
+  category: { type: String, required: true },
+  in_ear: Boolean,
+  wired: Boolean,
+  image_url: String,
+  price: Number,
+  discount: Boolean,
+  rating: Number,
+  description: String,
+  created_at: { type: Date, default: Date.now },
+});
+
+const Product = mongoose.model('Product', ProductSchema);
+
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/product', productRoutes);
-// app.use('/check', authorize, (req, res) => {
-//   res.send({ message: 'User is authporised to do this behaviour' });
-// });
 
 app.get('/productAll', async (req, res) => {
   try {
-    const allProducts = await Product.find();
+    const allProducts = await Product.find({});
     if (allProducts) {
       res.status(200).json(allProducts);
     }
