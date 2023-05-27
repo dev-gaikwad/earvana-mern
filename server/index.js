@@ -25,6 +25,9 @@ app.use('/product', productRoutes);
 //   res.send({ message: 'User is authporised to do this behaviour' });
 // });
 
+app.use('/', (req, res) => {
+  res.send('Hello');
+});
 app.listen(process.env.PORT, () => {
   console.log('Server running ...');
 });
